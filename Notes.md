@@ -65,7 +65,24 @@ edits, H_change, Charge_change, Chiral_change = match_label(
 	reactants_smiles, products_smiles, replacement_dict, changed_atom_tags, 
     retro=RETRO, remote=REMOTE,
 )
-# 1. label_CHS_change(smiles1, smiles2, edit_num, replacement_dict, use_stereo) -> return atom_map_dict1, H_change::[atom_map_num:value], Charge_change, Chiral_change
+# 1. label_CHS_change(smiles1, smiles2, edit_num, replacement_dict, use_stereo) -> return atom_map_dict1, H_change::dict(atom_map_num=value), Charge_change, Chiral_change
 # 2. label_foward_edit_site(smiles1, smiles2, edit_num) -> formed_bonds, broken_bonds, changed_bonds, remote_bonds
 # # edits: ['A': (bond_idxs::List[(bond_start_atom_id, bond_end_atom_id),], bond_maps, bond_temps)]
+
+results = {
+    'products': products_smiles,
+    'reactants': reactants_smiles,
+    'necessary_reagent': clean_map_and_sort(reagents_list),
+    'reaction_smarts': canonical_template,
+    'intra_only': intra_only,
+    'dimer_only': dimer_only,
+    'reaction_id': reaction['_id'],
+    'replacement_dict': replacement_dict,
+    'change_atoms': changed_atom_tags,
+    'edits': edits,
+    'H_change': H_change,
+    'Charge_change': Charge_change,
+    'Chiral_change': Chiral_change
+    }
+return results
 ```
